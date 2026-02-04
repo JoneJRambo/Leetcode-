@@ -10,6 +10,12 @@ class Solution:
         for i in range(n - 2):  # 遍历每个元素作为第一个固定值
             if i > 0 and nums[i] == nums[i - 1]:  # 跳过重复的固定值，避免重复解
                 continue
+            # 优化一:
+            if nums[i] + nums[i + 1] + nums[i + 2] > 0:
+                break
+            # 优化二:
+            if nums[i] + nums[-1] + nums[-2] < 0:
+                continue
 
             target = -nums[i]  # 需要找两个数的和等于-target
             l, r = i + 1, n - 1  # 双指针从固定值后开始
