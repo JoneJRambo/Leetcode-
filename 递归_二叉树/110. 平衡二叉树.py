@@ -22,3 +22,12 @@ class Solution:
             # 返回当前节点的深度
             return max(left_depth, right_depth) + 1
         return get_depth(root) != -1
+
+if __name__ == '__main__':
+    s = Solution()
+    root = TreeNode(3)
+    root.left = TreeNode(9)
+    root.right = TreeNode(20)
+    root.right.left = TreeNode(15)
+    root.right.right = TreeNode(7)
+    print(s.isBalanced(root))
