@@ -9,3 +9,4 @@ class TreeNode:
         self.right = right
 class Solution:
     def flipEquiv(self, root1: Optional[TreeNode], root2: Optional[TreeNode]) -> bool:
+
