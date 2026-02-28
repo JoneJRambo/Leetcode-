@@ -15,7 +15,8 @@ class Solution:
         return True
 
 if __name__ == '__main__':
-    s = "A man, a plan, a canal: Panama"
+    # s = "A man, a plan, a canal: Panama"
+    s = "0P"
     solution = Solution()
     result = solution.isPalindrome(s)
     print(result)

@@ -74,9 +74,85 @@
 #     print("CUDA不可用，跳过GPU测试")
 
 
-import math
+# import math
+#
+# r1 = -2 / 3 * math.log(2 / 3, 2) - 1 / 3 * math.log(1 / 3, 2)
+#
+# info_gain = 1 - r1
+# print(info_gain)
 
-r1 = -2 / 3 * math.log(2 / 3, 2) - 1 / 3 * math.log(1 / 3, 2)
 
-info_gain = 1 - r1
-print(info_gain)
+import numpy as np
+import matplotlib.pyplot as plt
+
+# 设置中文字体（确保中文标签正常显示）
+plt.rcParams['font.sans-serif'] = ['SimHei']
+plt.rcParams['axes.unicode_minus'] = False
+
+# 定义Leaky ReLU函数
+def leaky_relu(x, alpha=0.01):
+    """
+    Leaky ReLU函数实现
+    参数:
+        x: 输入值（可以是单个值或数组）
+        alpha: 负区间的斜率，默认0.01（常用值还有0.1）
+    返回:
+        Leaky ReLU的输出值
+    """
+    return np.where(x > 0, x, alpha * x)
+
+# 生成x轴数据（范围覆盖正负区间，体现函数特性）
+x = np.linspace(-10, 10, 1000)
+# 计算两个不同alpha值的Leaky ReLU输出（对比展示）
+y_default = leaky_relu(x, alpha=0.01)  # 默认alpha=0.01
+y_alpha01 = leaky_relu(x, alpha=0.1)   # alpha=0.1（更常用的替代值）
+
+# 创建画布
+plt.figure(figsize=(10, 6))
+
+# 绘制不同alpha的Leaky ReLU曲线
+plt.plot(x, y_default, label=r'Leaky ReLU ($\alpha=0.01$)', linewidth=2, color='#2E86AB')
+plt.plot(x, y_alpha01, label=r'Leaky ReLU ($\alpha=0.1$)', linewidth=2, color='#A23B72', linestyle='--')
+
+# 绘制ReLU函数（对比参考）
+y_relu = np.maximum(0, x)
+plt.plot(x, y_relu, label='ReLU', linewidth=1.5, color='#F18F01', linestyle=':')
+
+# 添加辅助线
+plt.axhline(y=0, color='black', linestyle='-', linewidth=0.8, alpha=0.7)
+plt.axvline(x=0, color='black', linestyle='-', linewidth=0.8, alpha=0.7)
+
+# 设置图表样式
+plt.title('Leaky ReLU函数图像', fontsize=16, fontweight='bold', pad=20)
+plt.xlabel('输入值 (x)', fontsize=12)
+plt.ylabel('输出值 (Leaky ReLU(x))', fontsize=12)
+plt.legend(fontsize=11)
+plt.grid(True, alpha=0.3)
+plt.xlim(-10, 10)
+plt.ylim(-2, 10)
+
+# 显示图表
+plt.tight_layout()
+plt.show()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
